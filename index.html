@@ -32,7 +32,7 @@ nav button,.btn{background:#ffffff16;color:#fff;border:1px solid #ffd8e877;borde
 <button data-go="memories">Memories 📸</button><button data-go="wish">Wish ✨</button><button data-go="message">My Message ❤️</button>
 </nav>
 <button class="btn music" id="musicBtn">🎵 Play HBD</button>
-<audio id="music" loop><source src="assets/hbd-music.mp3"></audio>
+<audio id="music" autoplay loop playsinline><source src="assets/hbd-music.mp3" type="audio/mpeg"></audio>
 
 <section id="home" class="page active"><div class="card">
 <small>A LITTLE SURPRISE MADE SPECIALLY FOR</small><div class="name">Hayat ♡</div><h1 class="title">Happy Birthday 🎂✨</h1>
@@ -91,7 +91,24 @@ function showDua(){dua.textContent=duas[di];[...dots.children].forEach((d,i)=>d.
 document.getElementById('nextDua').onclick=()=>{di=(di+1)%duas.length;showDua()};
 
 const audio=document.getElementById('music'),mb=document.getElementById('musicBtn');
-mb.onclick=async()=>{if(audio.paused){await audio.play();mb.textContent='⏸ Pause HBD'}else{audio.pause();mb.textContent='🎵 Play HBD'}};
+async function startMusic(){
+  try{
+    await audio.play();
+    mb.textContent='⏸ Pause HBD';
+  }catch(e){
+    // Browsers may block sound autoplay until the visitor interacts once.
+  }
+}
+window.addEventListener('load',startMusic);
+['click','touchstart','keydown'].forEach(evt=>{
+  document.addEventListener(evt,()=>{
+    if(audio.paused) startMusic();
+  },{once:true});
+});
+mb.onclick=async()=>{
+  if(audio.paused){await audio.play();mb.textContent='⏸ Pause HBD'}
+  else{audio.pause();mb.textContent='🎵 Play HBD'}
+};
 
 function celebrate(){
  const box=document.getElementById('celebrate');box.classList.add('show');
