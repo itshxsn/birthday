@@ -24,7 +24,7 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
 #intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 .intro-card{width:min(720px,92vw);padding:40px 22px}
 .intro-line{font-size:clamp(18px,5vw,28px);letter-spacing:2px;opacity:0;animation:introText 2s .3s forwards}
-.intro-name{font-size:clamp(70px,19vw,125px);font-style:italic;color:var(--pink);opacity:0;transform:scale(.8);animation:reveal 1.7s 2s forwards;text-shadow:0 0 35px #ff9fcf99}
+.intro-name{font-size:clamp(70px,19vw,125px);font-style:italic;color:var(--pink);opacity:0;transform:scale(.8);animation:reveal 1.7s 2s forwards;text-shadow:0 0 35px #ff9fcf99}.intro-open{opacity:0;transform:translateY(14px);animation:introButton .9s 3.25s forwards;background:#ffd5e71c;box-shadow:0 0 30px #ff9fcf22}@keyframes introButton{to{opacity:1;transform:none}}
 @keyframes introText{to{opacity:1}}@keyframes reveal{to{opacity:1;transform:scale(1)}}
 
 #app{height:100vh;display:none;position:relative}
@@ -73,6 +73,7 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
   <div class="intro-card">
     <div class="intro-line">Someone made something special for you...</div>
     <div class="intro-name">Hayat ❤️</div>
+    <button class="btn intro-open" id="introOpen">Open Your Surprise ✨</button>
   </div>
 </div>
 
@@ -195,7 +196,17 @@ function go(id){
 document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>go(b.dataset.next));
 
 const intro=document.getElementById('intro'),app=document.getElementById('app');
-setTimeout(()=>{intro.classList.add('hide');app.classList.add('ready');go('home')},4500);
+let introOpened=false;
+function openSurprise(){
+  if(introOpened)return;
+  introOpened=true;
+  intro.classList.add('hide');
+  app.classList.add('ready');
+  go('home');
+}
+document.getElementById('introOpen').onclick=openSurprise;
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!introOpened)openSurprise()});
+setTimeout(openSurprise,8000);
 
 const stars=document.getElementById('stars');
 for(let i=0;i<65;i++){let s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';stars.appendChild(s)}
@@ -241,7 +252,7 @@ function showMemory(){
  },220);
 }
 document.getElementById('nextMemory').onclick=()=>{mi=(mi+1)%memories.length;showMemory()};
-showMemory();showMemory()};
+showMemory();
 
 const message="I’ll always be there for you\\nmaybe I won’t be there in all your ups\\nbut I promise I’ll always be there in your downs. ❤️";
 let typedDone=false;
