@@ -50,7 +50,7 @@ nav button,.btn{background:#ffffff16;color:#fff;border:1px solid #ffd8e877;borde
 
 <section id="memories" class="page"><div class="card memory-card"><small>A LITTLE MEMORY 📸</small>
 <h1 class="title">A picture just for you ❤️</h1><img class="photo" src="assets/hayat-birthday.jpg">
-<p class="text">One picture for you. 🥹❤️</p>
+<p class="text">One picture for now... maybe there will be more memories to add later. 🥹❤️</p>
 <button class="btn" data-go="wish">Now make a wish ✨</button></div></section>
 
 <section id="wish" class="page"><div class="card"><small>THE MOST IMPORTANT PART ✨</small>
@@ -67,10 +67,10 @@ nav button,.btn{background:#ffffff16;color:#fff;border:1px solid #ffd8e877;borde
 <section id="final" class="page"><div class="card"><small>AND FINALLY...</small>
 <div class="name">Hayat ❤️</div><h1 class="title">Happiest Birthday 🎂</h1>
 <p class="text">May Allah fill your life with happiness love success peace and countless blessings.</p>
-<p class="text">Ameen summa Ameen 🤲🏻❤️</p><button class="btn" id="again">Celebrate Again 🎉</button></div></section>
+<p class="text">Ameen summa Ameen 🤲🏻❤️</p><div class="choice">👏🏻 YAHOOO! 🎉</div><br><button class="btn" id="again">Celebrate Again 🎉</button></div></section>
 
 <div id="celebrate"><div class="card"><div class="pop">🎉🎊</div><div style="font-size:90px">🎂</div>
-<h1 class="title">WISH ACCEPTED ❤️</h1><p class="text">May Allah make your wish come true in an even more beautiful way than you imagined. 🤲🏻✨</p>
+<h1 class="title">WISH ACCEPTED ❤️🎉</h1><p class="text">May Allah make your wish come true in an even more beautiful way than you imagined. 🤲🏻✨</p>
 <p class="text">Ameen summa Ameen ❤️</p><button class="btn" id="close">Continue → ❤️</button></div></div>
 
 <script>
@@ -111,8 +111,58 @@ mb.onclick=async()=>{
   else{audio.pause();mb.textContent='🎵 Play HBD'}
 };
 
+
+let audioCtx=null;
+function getAudioCtx(){
+  if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  return audioCtx;
+}
+function clap(){
+  const ctx=getAudioCtx();
+  const now=ctx.currentTime;
+  // Several short noise bursts create a natural hand-clap texture.
+  for(let i=0;i<9;i++){
+    const dur=.075+Math.random()*.045;
+    const buffer=ctx.createBuffer(1,Math.floor(ctx.sampleRate*dur),ctx.sampleRate);
+    const data=buffer.getChannelData(0);
+    for(let j=0;j<data.length;j++){
+      const env=Math.pow(1-j/data.length,2.2);
+      data[j]=(Math.random()*2-1)*env;
+    }
+    const src=ctx.createBufferSource();
+    const filter=ctx.createBiquadFilter();
+    const gain=ctx.createGain();
+    filter.type='bandpass'; filter.frequency.value=1200+Math.random()*1400; filter.Q.value=.7;
+    gain.gain.value=.16;
+    src.buffer=buffer; src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+    src.start(now+i*.11+Math.random()*.035);
+  }
+}
+function yahoo(){
+  const ctx=getAudioCtx();
+  const now=ctx.currentTime;
+  // Synthesized "YAHOO!"-style cheer: rising notes + crowd-like bursts.
+  const notes=[392,494,587,784,988];
+  notes.forEach((freq,i)=>{
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.type='sawtooth'; o.frequency.setValueAtTime(freq,now+i*.09);
+    g.gain.setValueAtTime(0,now+i*.09);
+    g.gain.linearRampToValueAtTime(.12,now+i*.09+.025);
+    g.gain.exponentialRampToValueAtTime(.001,now+i*.09+.28);
+    o.connect(g);g.connect(ctx.destination);o.start(now+i*.09);o.stop(now+i*.09+.3);
+  });
+  clap();
+  setTimeout(clap,650);
+}
+function celebrationSounds(){
+  yahoo();
+  setTimeout(clap,900);
+}
 function celebrate(){
+ getAudioCtx();
  const box=document.getElementById('celebrate');box.classList.add('show');
+ celebrationSounds();
  try{audio.play();mb.textContent='⏸ Pause HBD'}catch(e){}
  for(let i=0;i<140;i++){let x=document.createElement('span');x.className='fall';
  x.textContent=['🎉','✨','❤️','💗','⭐','🎊','🌸'][Math.floor(Math.random()*7)];
