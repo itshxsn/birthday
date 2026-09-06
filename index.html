@@ -12,6 +12,10 @@ body{overflow:hidden;background:#09050b url("assets/hayat-birthday.jpg") center/
 body:before{content:"";position:fixed;inset:-5%;background:inherit;z-index:-4;transform:scale(1.05);animation:ken 18s ease-in-out infinite alternate;filter:saturate(1.1)}
 body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 50% 35%,#ffbad833,transparent 45%),linear-gradient(#08040a99,#08040acc)}
 @keyframes ken{from{transform:scale(1.05)}to{transform:scale(1.13)}}
+@keyframes in{from{opacity:0;transform:scale(.94) translateY(18px)}to{opacity:1;transform:none}}
+@keyframes glowPulse{0%,100%{box-shadow:0 15px 80px #0008,0 0 0 #ff9dcc00}50%{box-shadow:0 15px 80px #0008,0 0 45px #ff9dcc33}}
+@keyframes floatUp{from{transform:translateY(10px)}to{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
 #stars{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
 .star{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;opacity:.2;animation:twinkle 2s ease-in-out infinite alternate}
 @keyframes twinkle{to{opacity:1;transform:scale(1.8)}}
@@ -27,15 +31,15 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
 #app.ready{display:block}
 .page{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:76px 18px 65px;opacity:0;visibility:hidden;transform:translateY(24px) scale(.985);transition:opacity .65s,transform .65s,visibility .65s}
 .page.active{opacity:1;visibility:visible;transform:none}
-.card{width:min(760px,94vw);max-height:calc(100vh - 140px);overflow:auto;text-align:center;padding:34px 22px;border:1px solid #fff3;border-radius:34px;background:var(--glass);backdrop-filter:blur(8px);box-shadow:0 15px 80px #0008}
+.card{width:min(760px,94vw);max-height:calc(100vh - 140px);overflow:auto;text-align:center;padding:34px 22px;border:1px solid #fff3;border-radius:34px;background:var(--glass);backdrop-filter:blur(10px);box-shadow:0 15px 80px #0008;animation:glowPulse 4s ease-in-out infinite}
 .kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;opacity:.8}
 .name{font-size:clamp(62px,18vw,118px);font-style:italic;color:var(--pink);text-shadow:0 0 25px #ff9dcc}
-.title{font-size:clamp(28px,7vw,46px);margin:10px 0 18px}
-.text{font-size:clamp(17px,4.3vw,22px);line-height:1.8;margin:15px auto;max-width:650px}
+.title{font-size:clamp(28px,7vw,46px);margin:10px 0 18px;background:linear-gradient(90deg,#fff,#ffd2e7,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite}
+.text{font-size:clamp(17px,4.3vw,22px);line-height:1.8;margin:15px auto;max-width:650px;animation:in .8s ease both}
 .btn{border:1px solid #ffd8e888;background:#ffffff13;color:#fff;border-radius:999px;padding:13px 20px;margin:5px;cursor:pointer;font-family:inherit;font-size:15px;transition:.25s}
-.btn:hover{background:#fff2;transform:translateY(-2px)}
-.hero-photo{width:min(480px,92%);max-height:42vh;object-fit:contain;border-radius:24px;box-shadow:0 15px 55px #0009}
-.memory-photo{width:min(650px,95%);max-height:62vh;object-fit:contain;border-radius:22px;box-shadow:0 18px 60px #000a}
+.btn:hover{background:#fff2;transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.hero-photo{width:min(480px,92%);max-height:42vh;object-fit:contain;border-radius:24px;box-shadow:0 15px 55px #0009;animation:floatUp 3s ease-in-out infinite alternate}
+.memory-photo{width:min(650px,95%);max-height:62vh;object-fit:contain;border-radius:22px;box-shadow:0 18px 60px #000a;transition:opacity .45s,transform .45s}
 .progress{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:30;font-size:12px;letter-spacing:3px;background:#09050bcc;border:1px solid #fff2;border-radius:999px;padding:8px 14px;backdrop-filter:blur(8px)}
 .progressbar{position:fixed;top:0;left:0;height:2px;background:#ffd2e6;z-index:31;width:0;transition:width .5s}
 .dots{display:flex;justify-content:center;gap:7px;margin:14px}.dot{width:6px;height:6px;border-radius:50%;background:#fff4}.dot.on{background:#ffd4e8;box-shadow:0 0 10px #ffd4e8}
@@ -43,7 +47,7 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
 #dua{min-height:145px;display:flex;align-items:center;justify-content:center;transition:opacity .25s}
 .ameen{font-size:15px;color:#ffd9e8;opacity:.9;margin-top:8px}
 .memory-count{font-size:13px;opacity:.7;letter-spacing:2px}
-.type{min-height:155px;display:flex;align-items:center;justify-content:center}
+.type{min-height:175px;display:flex;align-items:center;justify-content:center;white-space:pre-line}.type span{white-space:pre-line}
 .type span{border-right:1px solid #fff8;padding-right:4px;animation:cursor .7s infinite}@keyframes cursor{50%{border-color:transparent}}
 
 #celebrate{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:#050207ed;text-align:center;padding:18px}
@@ -73,7 +77,7 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
 </div>
 
 <div id="app">
-  <div class="progress" id="progress">01 / 08</div>
+  <div class="progress" id="progress">01 / 09</div>
   <div class="progressbar" id="progressbar"></div>
 
   <section class="page active" id="home"><div class="card">
@@ -90,6 +94,7 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
     <h1 class="title">Hey Hayat... 👀</h1>
     <p class="text">Today is all about you.</p>
     <p class="text">So don't rush. There are a few little things I wanted you to see. ❤️</p>
+    <div style="font-size:48px;animation:floatUp 2.5s ease-in-out infinite alternate">✨ 🦋 ✨</div>
     <button class="btn next" data-next="duas">Continue → 🤲🏻</button>
   </div></section>
 
@@ -105,7 +110,7 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
   <section class="page" id="memories"><div class="card">
     <div class="kicker">03 • A little memory 📸</div>
     <h1 class="title" id="memoryTitle">Memory 01</h1>
-    <img class="memory-photo" id="memoryPhoto" src="assets/hayat-birthday.jpg" alt="Memory">
+    <img class="memory-photo" id="memoryPhoto" src="assets/hayat-birthday.jpg" alt="Birthday memory">
     <p class="memory-count" id="memoryCount">01 / 04</p>
     <p class="text" id="memoryText">A little picture just for you. ❤️</p>
     <button class="btn" id="nextMemory">Next Memory →</button>
@@ -121,12 +126,34 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
     <button class="btn" id="makeWish">I Made My Wish ✨</button>
   </div></section>
 
+  <section class="page" id="reminder"><div class="card">
+    <div class="kicker">05 • Just a little reminder</div>
+    <h1 class="title">You deserve beautiful days 🌷</h1>
+    <p class="text">More reasons to smile</p>
+    <p class="text">More peaceful mornings</p>
+    <p class="text">More dreams coming true</p>
+    <p class="text">And more moments that make you genuinely happy. ✨</p>
+    <div style="font-size:45px;letter-spacing:8px">🌸 ✨ ❤️ ✨ 🌸</div>
+    <button class="btn next" data-next="message">My message → ❤️</button>
+  </div></section>
+
   <section class="page" id="message"><div class="card">
     <div class="kicker">05 • My message for you ❤️</div>
     <h1 class="title">Hayat</h1>
     <div class="text type" id="typedMessage"></div>
     <p class="text">May Allah always keep you happy and blessed. 🤲🏻❤️</p>
     <button class="btn next" data-next="final">One last thing → 🎂</button>
+  </div></section>
+
+  <section class="page" id="blessing"><div class="card">
+    <div class="kicker">07 • One last dua 🤲🏻</div>
+    <h1 class="title">For the year ahead ✨</h1>
+    <p class="text">May Allah protect your smile</p>
+    <p class="text">May He make your heart peaceful</p>
+    <p class="text">May He turn your difficult days into easier ones</p>
+    <p class="text">And may every good thing written for you find its way to you. 🤲🏻❤️</p>
+    <p class="text">Ameen summa Ameen.</p>
+    <button class="btn next" data-next="final">Finish the surprise → 🎂</button>
   </div></section>
 
   <section class="page" id="final"><div class="card">
@@ -152,15 +179,18 @@ body:after{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradie
 
 <script>
 const pages=[...document.querySelectorAll('.page')];
-const order=['home','secret','duas','memories','wish','message','final'];
+const order=['home','secret','duas','memories','wish','reminder','message','blessing','final'];
 const progress=document.getElementById('progress'),bar=document.getElementById('progressbar');
 
+function miniSparkles(){
+ for(let i=0;i<10;i++){let s=document.createElement('span');s.className='fire';s.textContent='✦';s.style.left=(35+Math.random()*30)+'vw';s.style.top=(35+Math.random()*30)+'vh';s.style.setProperty('--x',(Math.random()*160-80)+'px');s.style.setProperty('--y',(Math.random()*160-80)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),1800)}
+}
 function go(id){
   pages.forEach(p=>p.classList.toggle('active',p.id===id));
   const i=order.indexOf(id);
-  progress.textContent=String(Math.max(i+1,1)).padStart(2,'0')+' / 07';
+  progress.textContent=String(Math.max(i+1,1)).padStart(2,'0')+' / 09';
   bar.style.width=((Math.max(i,0)/(order.length-1))*100)+'%';
-  if(id==='message')typeMessage();
+  if(id==='message')typeMessage(); miniSparkles();
 }
 document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>go(b.dataset.next));
 
@@ -191,14 +221,27 @@ showDua();
 document.getElementById('nextDua').onclick=()=>{di=(di+1)%duas.length;showDua()};
 
 const memories=[
-["Memory 01","A little picture just for you. ❤️"],
-["Memory 02","Some moments deserve to be remembered. ✨"],
-["Memory 03","One more little memory for your birthday. 🥹❤️"],
-["Memory 04","And one last picture before your wish. 🎂❤️"]
+["Memory 01","A little picture just for you. ❤️","assets/hayat-birthday.jpg"],
+["Memory 02","A soft little birthday moment made just for you. ✨","assets/memory-ai-1.png"],
+["Memory 03","May your days always have this kind of warmth. 🌷","assets/memory-ai-2.png"],
+["Memory 04","And may the next chapter be even more beautiful. 🎂❤️","assets/memory-ai-3.png"]
 ];
 let mi=0;
-function showMemory(){document.getElementById('memoryTitle').textContent=memories[mi][0];document.getElementById('memoryText').textContent=memories[mi][1];document.getElementById('memoryCount').textContent=String(mi+1).padStart(2,'0')+' / 04';document.getElementById('memoryPhoto').style.animation='none';void document.getElementById('memoryPhoto').offsetWidth;document.getElementById('memoryPhoto').style.animation='in .6s'}
+function showMemory(){
+ const im=document.getElementById('memoryPhoto');
+ im.style.opacity=0;
+ im.style.transform='scale(.96)';
+ setTimeout(()=>{
+   document.getElementById('memoryTitle').textContent=memories[mi][0];
+   document.getElementById('memoryText').textContent=memories[mi][1];
+   document.getElementById('memoryCount').textContent=String(mi+1).padStart(2,'0')+' / 04';
+   im.src=memories[mi][2];
+   im.onload=()=>{im.style.opacity=1;im.style.transform='scale(1)'};
+   if(im.complete){im.style.opacity=1;im.style.transform='scale(1)'}
+ },220);
+}
 document.getElementById('nextMemory').onclick=()=>{mi=(mi+1)%memories.length;showMemory()};
+showMemory();showMemory()};
 
 const message="I’ll always be there for you\\nmaybe I won’t be there in all your ups\\nbut I promise I’ll always be there in your downs. ❤️";
 let typedDone=false;
@@ -221,10 +264,25 @@ function effects(){yahoo();setTimeout(clap,1000);
 }
 function bigCelebrate(){
  ac();heartbeat();
- setTimeout(()=>{document.getElementById('celebrate').classList.add('show');startMusic();effects()},1700);
+ const card=document.querySelector('#celebrate .celebrate-card');
+ const original=card.innerHTML;
+ card.innerHTML='<div class="kicker">GET READY...</div><div class="celebrate-title" id="count">3</div><p class="text">Make your wish with all your heart. ✨</p>';
+ document.getElementById('celebrate').classList.add('show');
+ let n=3;
+ const t=setInterval(()=>{
+   n--;
+   if(n>0){document.getElementById('count').textContent=n;heartbeat()}
+   else{
+     clearInterval(t);
+     card.innerHTML=original;
+     document.getElementById('celebrate').classList.add('show');
+     startMusic();effects();
+     document.getElementById('continueAfterCelebrate').onclick=()=>{document.getElementById('celebrate').classList.remove('show');go('reminder')};
+   }
+ },800);
 }
 document.getElementById('makeWish').onclick=bigCelebrate;
 document.getElementById('finalCelebrate').onclick=()=>{document.getElementById('celebrate').classList.add('show');effects();startMusic()};
-document.getElementById('continueAfterCelebrate').onclick=()=>{document.getElementById('celebrate').classList.remove('show');go('message')};
+document.getElementById('continueAfterCelebrate').onclick=()=>{document.getElementById('celebrate').classList.remove('show');go('reminder')};
 </script>
 </body></html>
