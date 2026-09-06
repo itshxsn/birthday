@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Birthday Hayat ❤️</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif}
+body{overflow-x:hidden;background:#120b13;color:#fff}
+.page{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(#130b16aa,#130b16aa),url("assets/hayat-birthday.jpg") center/cover fixed;padding:28px 16px}
+.glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 40%,#ffd9ef22,transparent 45%)}
+.card{width:min(680px,94vw);text-align:center;padding:48px 24px;border-radius:34px;
+background:#1b101b55;backdrop-filter:blur(3px);box-shadow:0 0 60px #ff9fce22;border:1px solid #ffffff22}
+.kicker{letter-spacing:5px;text-transform:uppercase;font-size:12px;opacity:.9}
+h1{font-size:clamp(54px,15vw,110px);margin:14px 0 4px;font-style:italic;
+color:#ffd1e7;text-shadow:0 0 20px #ff8fc6aa,0 0 50px #ff8fc655}
+h2{font-size:clamp(24px,6vw,42px);margin:0 0 25px;color:#fff3f8}
+.message{font-size:clamp(17px,4.3vw,22px);line-height:1.7;min-height:120px;margin:18px auto;max-width:590px}
+#dua{opacity:0;transform:translateY(12px);transition:.8s}
+#dua.show{opacity:1;transform:none}
+button{border:1px solid #ffd6e8aa;background:#ffffff18;color:white;border-radius:999px;padding:13px 22px;
+font-size:15px;cursor:pointer;margin:8px;backdrop-filter:blur(5px)}
+button:hover{background:#ffffff2c}.music{position:fixed;right:16px;top:16px}
+.footer{margin-top:25px;font-size:15px;opacity:.9}
+.heart{position:fixed;bottom:-30px;font-size:22px;animation:rise linear forwards;pointer-events:none}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.fade{animation:fade 1.2s ease both}@keyframes fade{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.small{font-size:14px;opacity:.8}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="glow"></div>
+<button class="music" id="musicBtn">🎵 Play HBD</button>
+<main class="card fade">
+<div class="kicker">A little surprise for you</div>
+<h1>Hayat ♡</h1>
+<h2>Happy Birthday 🎂</h2>
+<div class="message"><div id="dua" class="show"></div></div>
+<button id="next">Next Dua 🤲🏻</button>
+<button id="wish">Make a Wish ✨</button>
+<div class="footer">I’ll always be there for you maybe I won’t be there in all your ups but I promise I’ll always be there in your downs. ❤️</div>
+<div class="small">May Allah always keep you happy and blessed. Ameen 🤲🏻</div>
+</main>
+</div>
+<audio id="music" loop preload="auto"><source src="assets/hbd-music.mp3" type="audio/mpeg"></audio>
+<script>
+const duas=[
+"May Allah always keep you happy and fill your life with endless peace and beautiful moments. 🤲🏻❤️",
+"May Allah accept every good wish in your heart and give you what is best for you. 🤲🏻",
+"May Allah protect you from every sadness, bad eye, negativity and every hardship. 🤍",
+"May Allah open beautiful doors for you, give you success and make every step of your life easy. ✨",
+"May Allah bless you with a long, healthy and beautiful life surrounded by people who genuinely love you. ❤️",
+"May Allah fulfill your dreams, increase your happiness and keep your heart close to Him. Ameen summa ameen. 🤲🏻❤️"
+];
+let i=0;const dua=document.getElementById("dua");
+function show(){dua.classList.remove("show");setTimeout(()=>{dua.textContent=duas[i];dua.classList.add("show")},150)}
+show();
+document.getElementById("next").onclick=()=>{i=(i+1)%duas.length;show();hearts(8)};
+document.getElementById("wish").onclick=()=>{
+dua.textContent="Close your eyes and make a beautiful wish… ✨ May Allah make it come true. Ameen 🤲🏻❤️";
+dua.classList.add("show");hearts(24);
+};
+const audio=document.getElementById("music"),btn=document.getElementById("musicBtn");
+btn.onclick=async()=>{if(audio.paused){await audio.play();btn.textContent="⏸ Pause HBD"}else{audio.pause();btn.textContent="🎵 Play HBD"}};
+function hearts(n=6){for(let j=0;j<n;j++){const x=document.createElement("div");x.className="heart";x.textContent=["❤️","💗","♡","✨"][Math.floor(Math.random()*4)];
+x.style.left=Math.random()*100+"vw";x.style.animationDuration=(4+Math.random()*4)+"s";x.style.fontSize=(16+Math.random()*20)+"px";document.body.appendChild(x);setTimeout(()=>x.remove(),9000)}}
+setInterval(()=>hearts(2),1700);
+</script>
+</body>
+</html>
