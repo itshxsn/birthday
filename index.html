@@ -1322,107 +1322,82 @@ document
 
 
 /* MEMORIES */
-
-const memories=[
-
-  [
-    "Memory 01",
-    "A little picture just for you. ❤️",
-    "assets/hayat-birthday.jpg"
-  ],
-
-  [
-    "Memory 02",
-    "A soft little birthday moment made just for you. ✨",
-    "assets/memory-ai-1.png"
-  ],
-
-  [
-    "Memory 03",
-    "May your days always have this kind of warmth. 🌷",
-    "assets/memory-ai-2.png"
-  ],
-
-  [
-    "Memory 04",
-    "And may the next chapter be even more beautiful. 🎂❤️",
-    "assets/memory-ai-3.png"
-  ]
-
+  
+const memories = [
+  {
+    title: "Memory 01",
+    text: "A little picture just for you. ❤️",
+    image: "assets/hayat-birthday.jpg"
+  },
+  {
+    title: "Memory 02",
+    text: "A soft little birthday moment made just for you. ✨",
+    image: "assets/memory-ai-1.png"
+  },
+  {
+    title: "Memory 03",
+    text: "May your days always have this kind of warmth. 🌷",
+    image: "assets/memory-ai-2.png"
+  },
+  {
+    title: "Memory 04",
+    text: "And may the next chapter be even more beautiful. 🎂❤️",
+    image: "assets/memory-ai-3.png"
+  }
 ];
 
+let mi = 0;
 
-let mi=0;
+const memoryPhoto = document.getElementById("memoryPhoto");
+const memoryTitle = document.getElementById("memoryTitle");
+const memoryText = document.getElementById("memoryText");
+const memoryCount = document.getElementById("memoryCount");
+const nextMemory = document.getElementById("nextMemory");
 
+function showMemory() {
 
-function showMemory(){
+  const memory = memories[mi];
 
-  const im=
-    document.getElementById(
-      'memoryPhoto'
-    );
+  memoryPhoto.style.opacity = "0";
 
-  im.style.opacity=0;
+  setTimeout(() => {
 
-  im.style.transform=
-    'scale(.96)';
+    memoryTitle.textContent = memory.title;
+    memoryText.textContent = memory.text;
+    memoryCount.textContent =
+      String(mi + 1).padStart(2, "0") + " / 04";
 
-  setTimeout(()=>{
+    memoryPhoto.src = memory.image;
 
-    document.getElementById(
-      'memoryTitle'
-    ).textContent=
-      memories[mi][0];
-
-    document.getElementById(
-      'memoryText'
-    ).textContent=
-      memories[mi][1];
-
-    document.getElementById(
-      'memoryCount'
-    ).textContent=
-      String(mi+1)
-      .padStart(2,'0')
-      +' / 04';
-
-    im.src=
-      memories[mi][2];
-
-    im.onload=()=>{
-      im.style.opacity=1;
-      im.style.transform=
-        'scale(1)';
+    memoryPhoto.onload = () => {
+      memoryPhoto.style.opacity = "1";
     };
 
-    if(im.complete){
+    memoryPhoto.onerror = () => {
+      console.error("Could not load:", memory.image);
+      memoryText.textContent =
+        "Picture could not be loaded: " + memory.image;
+      memoryPhoto.style.opacity = "1";
+    };
 
-      im.style.opacity=1;
-
-      im.style.transform=
-        'scale(1)';
-
-    }
-
-  },220);
-
+  }, 250);
 }
 
+nextMemory.addEventListener("click", () => {
 
-document
-  .getElementById('nextMemory')
-  .onclick=()=>{
+  mi++;
 
-    mi=
-      (mi+1)%
-      memories.length;
+  if (mi >= memories.length) {
+    mi = 0;
+  }
 
-    showMemory();
+  showMemory();
 
-  };
-
+});
 
 showMemory();
+
+
 
 
 /* PERSONAL MESSAGE */
