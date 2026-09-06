@@ -1,72 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Happy Birthday Hayat ❤️</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Hayat ❤️</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif}
-body{overflow-x:hidden;background:#120b13;color:#fff}
-.page{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;
-background:linear-gradient(#130b16aa,#130b16aa),url("assets/hayat-birthday.jpg") center/cover fixed;padding:28px 16px}
-.glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 40%,#ffd9ef22,transparent 45%)}
-.card{width:min(680px,94vw);text-align:center;padding:48px 24px;border-radius:34px;
-background:#1b101b55;backdrop-filter:blur(3px);box-shadow:0 0 60px #ff9fce22;border:1px solid #ffffff22}
-.kicker{letter-spacing:5px;text-transform:uppercase;font-size:12px;opacity:.9}
-h1{font-size:clamp(54px,15vw,110px);margin:14px 0 4px;font-style:italic;
-color:#ffd1e7;text-shadow:0 0 20px #ff8fc6aa,0 0 50px #ff8fc655}
-h2{font-size:clamp(24px,6vw,42px);margin:0 0 25px;color:#fff3f8}
-.message{font-size:clamp(17px,4.3vw,22px);line-height:1.7;min-height:120px;margin:18px auto;max-width:590px}
-#dua{opacity:0;transform:translateY(12px);transition:.8s}
-#dua.show{opacity:1;transform:none}
-button{border:1px solid #ffd6e8aa;background:#ffffff18;color:white;border-radius:999px;padding:13px 22px;
-font-size:15px;cursor:pointer;margin:8px;backdrop-filter:blur(5px)}
-button:hover{background:#ffffff2c}.music{position:fixed;right:16px;top:16px}
-.footer{margin-top:25px;font-size:15px;opacity:.9}
-.heart{position:fixed;bottom:-30px;font-size:22px;animation:rise linear forwards;pointer-events:none}
-@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
-.fade{animation:fade 1.2s ease both}@keyframes fade{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-.small{font-size:14px;opacity:.8}
-</style>
-</head>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#fff;font-family:Georgia,serif;background:#100810 url('assets/hayat-birthday.jpg') center/cover fixed;overflow-x:hidden}
+body:after{content:"";position:fixed;inset:0;background:linear-gradient(#10081099,#10081077);z-index:-1}
+nav{position:fixed;top:7px;left:0;right:0;z-index:20;text-align:center;white-space:nowrap}
+nav button,.btn{background:#ffffff16;color:#fff;border:1px solid #ffd8e877;border-radius:999px;padding:10px 14px;margin:3px;cursor:pointer}
+.page{display:none;min-height:100vh;align-items:center;justify-content:center;padding:70px 18px 35px}.page.active{display:flex;animation:in .65s}
+@keyframes in{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.card{width:min(720px,95vw);text-align:center;padding:36px 20px;border:1px solid #fff3;border-radius:32px;background:#180d1850;backdrop-filter:blur(4px);box-shadow:0 0 70px #ff9fce22}
+.name{font-size:clamp(65px,18vw,120px);font-style:italic;color:#ffd2e7;text-shadow:0 0 25px #ff9dcc}
+.title{font-size:clamp(27px,7vw,45px)}.text{font-size:clamp(17px,4.5vw,22px);line-height:1.75}
+.photo{width:min(450px,92%);max-height:46vh;object-fit:contain;border-radius:24px;box-shadow:0 15px 50px #0009}
+.music{position:fixed;bottom:14px;right:14px;z-index:25}
+#celebrate{display:none;position:fixed;inset:0;z-index:50;background:#080308e8;align-items:center;justify-content:center;text-align:center;padding:18px}
+#celebrate.show{display:flex;animation:in .4s}.pop{font-size:78px;animation:pop .45s infinite alternate}
+@keyframes pop{to{transform:scale(1.15) rotate(3deg)}}.fall{position:fixed;top:-40px;z-index:60;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(900deg);opacity:0}}
+.fire{position:fixed;z-index:59;pointer-events:none;font-size:28px;animation:burst 1.4s ease-out forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(.2);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(1.3);opacity:0}}
+.balloon{position:fixed;bottom:-100px;z-index:58;animation:balloon 5s ease-out forwards;pointer-events:none}
+@keyframes balloon{to{transform:translateY(-120vh) rotate(12deg);opacity:0}}
+.choice{display:inline-block;padding:14px 18px;border:1px solid #fff3;border-radius:20px;margin:7px;background:#ffffff10}
+@media(max-width:500px){nav{overflow-x:auto;text-align:left;padding-left:5px}.card{padding:30px 15px}}
+</style></head>
 <body>
-<div class="page">
-<div class="glow"></div>
-<button class="music" id="musicBtn">🎵 Play HBD</button>
-<main class="card fade">
-<div class="kicker">A little surprise for you</div>
-<h1>Hayat ♡</h1>
-<h2>Happy Birthday 🎂</h2>
-<div class="message"><div id="dua" class="show"></div></div>
-<button id="next">Next Dua 🤲🏻</button>
-<button id="wish">Make a Wish ✨</button>
-<div class="footer">I’ll always be there for you maybe I won’t be there in all your ups but I promise I’ll always be there in your downs. ❤️</div>
-<div class="small">May Allah always keep you happy and blessed. Ameen 🤲🏻</div>
-</main>
-</div>
-<audio id="music" loop preload="auto"><source src="assets/hbd-music.mp3" type="audio/mpeg"></audio>
+<nav>
+<button data-go="home">Home</button><button data-go="secret">Secret 👀</button><button data-go="duas">Duas 🤲🏻</button>
+<button data-go="memories">Memories 📸</button><button data-go="wish">Wish ✨</button><button data-go="message">My Message ❤️</button>
+</nav>
+<button class="btn music" id="musicBtn">🎵 Play HBD</button>
+<audio id="music" loop><source src="assets/hbd-music.mp3"></audio>
+
+<section id="home" class="page active"><div class="card">
+<small>A LITTLE SURPRISE MADE SPECIALLY FOR</small><div class="name">Hayat ♡</div><h1 class="title">Happy Birthday 🎂✨</h1>
+<img class="photo" src="assets/hayat-birthday.jpg"><p class="text">I made something for you... but you have to discover it yourself. 👀❤️</p>
+<button class="btn" data-go="secret">Start the surprise →</button></div></section>
+
+<section id="secret" class="page"><div class="card"><small>SECRET MESSAGE 👀</small>
+<h1 class="title">Hey Hayat...</h1><p class="text">Before anything else just know that today is all about you. ❤️</p>
+<p class="text">So keep clicking... there is more waiting for you. ✨</p>
+<button class="btn" data-go="duas">Next → 🤲🏻</button></div></section>
+
+<section id="duas" class="page"><div class="card"><small>A FEW DUAS FOR YOU</small>
+<h1 class="title">May Allah bless you 🤲🏻</h1><p id="dua" class="text"></p><div id="dots"></div>
+<button class="btn" id="nextDua">Next Dua 🤲🏻</button><button class="btn" data-go="memories">Continue →</button></div></section>
+
+<section id="memories" class="page"><div class="card"><small>A LITTLE MEMORY 📸</small>
+<h1 class="title">A picture just for you ❤️</h1><img class="photo" src="assets/hayat-birthday.jpg">
+<p class="text">One picture for now... maybe there will be more memories to add later. 🥹❤️</p>
+<button class="btn" data-go="wish">Now make a wish ✨</button></div></section>
+
+<section id="wish" class="page"><div class="card"><small>THE MOST IMPORTANT PART ✨</small>
+<h1 class="title">Close your eyes...</h1><p class="text">Think of one beautiful wish. Keep it in your heart and don't tell anyone. ❤️</p>
+<div style="font-size:95px">🎂</div><p class="text">When you're ready press the button.</p>
+<button class="btn" id="makeWish">I Made My Wish ✨</button></div></section>
+
+<section id="message" class="page"><div class="card"><small>MY MESSAGE FOR YOU ❤️</small>
+<h1 class="title">Hayat</h1>
+<p class="text">I’ll always be there for you<br>maybe I won’t be there in all your ups<br>but I promise I’ll always be there in your downs. ❤️</p>
+<p class="text">May Allah always keep you happy and blessed. 🤲🏻</p>
+<button class="btn" data-go="final">One last thing → 🎂</button></div></section>
+
+<section id="final" class="page"><div class="card"><small>AND FINALLY...</small>
+<div class="name">Hayat ❤️</div><h1 class="title">Happiest Birthday 🎂</h1>
+<p class="text">May Allah fill your life with happiness love success peace and countless blessings.</p>
+<p class="text">Ameen summa Ameen 🤲🏻❤️</p><button class="btn" id="again">Celebrate Again 🎉</button></div></section>
+
+<div id="celebrate"><div class="card"><div class="pop">🎉🎊</div><div style="font-size:90px">🎂</div>
+<h1 class="title">WISH ACCEPTED ❤️</h1><p class="text">May Allah make your wish come true in an even more beautiful way than you imagined. 🤲🏻✨</p>
+<p class="text">Ameen summa Ameen ❤️</p><button class="btn" id="close">Continue → ❤️</button></div></div>
+
 <script>
+const pages=[...document.querySelectorAll('.page')];
+function go(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));scrollTo(0,0)}
+document.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go));
+
 const duas=[
 "May Allah always keep you happy and fill your life with endless peace and beautiful moments. 🤲🏻❤️",
 "May Allah accept every good wish in your heart and give you what is best for you. 🤲🏻",
-"May Allah protect you from every sadness, bad eye, negativity and every hardship. 🤍",
-"May Allah open beautiful doors for you, give you success and make every step of your life easy. ✨",
-"May Allah bless you with a long, healthy and beautiful life surrounded by people who genuinely love you. ❤️",
-"May Allah fulfill your dreams, increase your happiness and keep your heart close to Him. Ameen summa ameen. 🤲🏻❤️"
-];
-let i=0;const dua=document.getElementById("dua");
-function show(){dua.classList.remove("show");setTimeout(()=>{dua.textContent=duas[i];dua.classList.add("show")},150)}
-show();
-document.getElementById("next").onclick=()=>{i=(i+1)%duas.length;show();hearts(8)};
-document.getElementById("wish").onclick=()=>{
-dua.textContent="Close your eyes and make a beautiful wish… ✨ May Allah make it come true. Ameen 🤲🏻❤️";
-dua.classList.add("show");hearts(24);
-};
-const audio=document.getElementById("music"),btn=document.getElementById("musicBtn");
-btn.onclick=async()=>{if(audio.paused){await audio.play();btn.textContent="⏸ Pause HBD"}else{audio.pause();btn.textContent="🎵 Play HBD"}};
-function hearts(n=6){for(let j=0;j<n;j++){const x=document.createElement("div");x.className="heart";x.textContent=["❤️","💗","♡","✨"][Math.floor(Math.random()*4)];
-x.style.left=Math.random()*100+"vw";x.style.animationDuration=(4+Math.random()*4)+"s";x.style.fontSize=(16+Math.random()*20)+"px";document.body.appendChild(x);setTimeout(()=>x.remove(),9000)}}
-setInterval(()=>hearts(2),1700);
-</script>
-</body>
-</html>
+"May Allah protect you from every sadness bad eye negativity and every hardship. 🤍",
+"May Allah open beautiful doors for you give you success and make every step easy. ✨",
+"May Allah bless you with a long healthy and beautiful life surrounded by people who genuinely love you. ❤️",
+"May Allah fulfill your dreams increase your happiness and keep your heart close to Him. Ameen summa Ameen. 🤲🏻❤️"];
+let di=0,dua=document.getElementById('dua'),dots=document.getElementById('dots');
+duas.forEach((_,i)=>{let d=document.createElement('span');d.textContent=i?'○':'●';d.style.margin='5px';dots.appendChild(d)});
+function showDua(){dua.textContent=duas[di];[...dots.children].forEach((d,i)=>d.textContent=i===di?'●':'○')}showDua();
+document.getElementById('nextDua').onclick=()=>{di=(di+1)%duas.length;showDua()};
+
+const audio=document.getElementById('music'),mb=document.getElementById('musicBtn');
+mb.onclick=async()=>{if(audio.paused){await audio.play();mb.textContent='⏸ Pause HBD'}else{audio.pause();mb.textContent='🎵 Play HBD'}};
+
+function celebrate(){
+ const box=document.getElementById('celebrate');box.classList.add('show');
+ try{audio.play();mb.textContent='⏸ Pause HBD'}catch(e){}
+ for(let i=0;i<140;i++){let x=document.createElement('span');x.className='fall';
+ x.textContent=['🎉','✨','❤️','💗','⭐','🎊','🌸'][Math.floor(Math.random()*7)];
+ x.style.left=Math.random()*100+'vw';x.style.fontSize=14+Math.random()*25+'px';x.style.animationDuration=2+Math.random()*3+'s';
+ document.body.appendChild(x);setTimeout(()=>x.remove(),6000)}
+ for(let i=0;i<20;i++){let b=document.createElement('span');b.className='balloon';
+ b.textContent=['🎈','💗','❤️','🎈'][Math.floor(Math.random()*4)];b.style.left=Math.random()*100+'vw';
+ b.style.fontSize=30+Math.random()*25+'px';b.style.animationDelay=Math.random()*.8+'s';
+ document.body.appendChild(b);setTimeout(()=>b.remove(),6000)}
+ for(let i=0;i<45;i++){let f=document.createElement('span');f.className='fire';f.textContent='✨';
+ f.style.left=(20+Math.random()*60)+'vw';f.style.top=(30+Math.random()*30)+'vh';
+ f.style.setProperty('--x',(Math.random()*320-160)+'px');f.style.setProperty('--y',(Math.random()*320-160)+'px');
+ f.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(f);setTimeout(()=>f.remove(),2500)}
+}
+document.getElementById('makeWish').onclick=celebrate;document.getElementById('again').onclick=celebrate;
+document.getElementById('close').onclick=()=>{document.getElementById('celebrate').classList.remove('show');go('message')};
+</script></body></html>
